@@ -49,7 +49,7 @@ function main() {
 
       highp vec3 ambientLight = vec3(0.5, 0.5, 0.5);
       highp vec3 directionalLightColor = vec3(1, 1, 1);
-      highp vec3 directionalVector = normalize(vec3(0, 0, 2));
+      highp vec3 directionalVector = normalize(vec3(0, 0, 1));
 
       highp vec4 transformedNormal = u_NormalMatrix * vec4(a_Normal, 1.0);
 
@@ -91,6 +91,7 @@ function main() {
   }
 
   const buffers = initBuffers(gl);
+  const earthTexture = loadTexture(gl, 'earth_texture_3d/png');
 
   const fpsElem = document.querySelector("#fps");
 
@@ -105,10 +106,16 @@ function main() {
 
   gl.viewport(0, 0, gl.canvas.clientWidth, gl.canvas.clientHeight);
 
+
+
+
   gl.clearColor(0.0, 0.0, 0.0, 1.0);  // Clear to black, fully opaque
   gl.clearDepth(1.0);                 // Clear everything
   gl.enable(gl.DEPTH_TEST);           // Enable depth testing
-  gl.depthFunc(gl.LEQUAL);            // Near things obscure far things
+  // gl.depthFunc(gl.LEQUAL);            // Near things obscure far things
+
+
+
 
   function render(now) {
     now *= 0.001;                          // convert to seconds
@@ -130,17 +137,17 @@ function main() {
     objInfo.starName = 'Sun';
     objInfo.scale = 10;
     gl.bindTexture(gl.TEXTURE_2D, buffers.sunTexture);
-    drawScene(gl, programInfo, buffers, objInfo);
+    drawScene(gl, programInfo, buffers, buffers.sunTexture, objInfo);
 
     mercuryAngle += MERCURY_ROTATION_SPEED;
     objInfo.angle = mercuryAngle;
-    objInfo.xRadius = 4;
-    objInfo.zRadius = 3;
+    objInfo.xRadius = 14;
+    objInfo.zRadius = 13;
     objInfo.deltaTime = deltaTime;
     objInfo.starName = 'Mercury';
     objInfo.scale = .1;
     gl.bindTexture(gl.TEXTURE_2D, buffers.mercuryTexture);
-    drawScene(gl, programInfo, buffers, objInfo);
+    drawScene(gl, programInfo, buffers, buffers.mercuryTexture, objInfo);
 
     venusAngle += VENUS_ROTATION_SPEED;
     objInfo.angle = venusAngle;
@@ -148,19 +155,10 @@ function main() {
     objInfo.zRadius = 6;
     objInfo.deltaTime = deltaTime;
     objInfo.starName = 'Venus';
-    objInfo.scale = .3;
+    objInfo.scale = .2;
     gl.bindTexture(gl.TEXTURE_2D, buffers.venusTexture);
-    drawScene(gl, programInfo, buffers, objInfo);
+    drawScene(gl, programInfo, buffers, buffers.venusTexture, objInfo);
 
-    earthAngle += EARTH_ROTATION_SPEED;
-    objInfo.angle = earthAngle;
-    objInfo.xRadius = 10;
-    objInfo.zRadius = 10;
-    objInfo.deltaTime = deltaTime;
-    objInfo.scale = .4;
-    objInfo.starName = 'Earth';
-    gl.bindTexture(gl.TEXTURE_2D, buffers.earthTexture);
-    drawScene(gl, programInfo, buffers, objInfo);
 
     marsAngle += MARS_ROTATION_SPEED;
     objInfo.angle = marsAngle;
@@ -170,13 +168,69 @@ function main() {
     objInfo.scale = .3;
     objInfo.starName = 'Mars';
     gl.bindTexture(gl.TEXTURE_2D, buffers.marsTexture);
-    drawScene(gl, programInfo, buffers, objInfo);
+    drawScene(gl, programInfo, buffers, buffers.marsTexture, objInfo);
 
+    earthAngle += EARTH_ROTATION_SPEED;
+    objInfo.angle = earthAngle;
+    objInfo.xRadius = 10;
+    objInfo.zRadius = 10;
+    objInfo.deltaTime = deltaTime;
+    objInfo.scale = .4;
+    objInfo.starName = 'Earth';
+    gl.bindTexture(gl.TEXTURE_2D, earthTexture);
+    drawScene(gl, programInfo, buffers, earthTexture, objInfo);
 
     requestAnimationFrame(render);
   }
   requestAnimationFrame(render);
 
+}
+
+function loadTexture(gl, url) {
+  const texture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+
+  // Because images have to be download over the internet
+  // they might take a moment until they are ready.
+  // Until then put a single pixel in the texture so we can
+  // use it immediately. When the image has finished downloading
+  // we'll update the texture with the contents of the image.
+  const level = 0;
+  const internalFormat = gl.RGBA;
+  const width = 1;
+  const height = 1;
+  const border = 0;
+  const srcFormat = gl.RGBA;
+  const srcType = gl.UNSIGNED_BYTE;
+  const pixel = new Uint8Array([0, 0, 255, 255]);  // opaque blue
+  gl.texImage2D(gl.TEXTURE_2D, level, internalFormat,
+                width, height, border, srcFormat, srcType,
+                pixel);
+
+  const image = new Image();
+  image.onload = function() {
+    console.log("inside onload image");
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texImage2D(gl.TEXTURE_2D, level, internalFormat,
+                  srcFormat, srcType, image);
+
+    // WebGL1 has different requirements for power of 2 images
+    // vs non power of 2 images so check if the image is a
+    // power of 2 in both dimensions.
+    if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
+       // Yes, it's a power of 2. Generate mips.
+       gl.generateMipmap(gl.TEXTURE_2D);
+    } else {
+       // No, it's not a power of 2. Turn of mips and set
+       // wrapping to clamp to edge
+       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    }
+  };
+  image.src = url;
+
+  return texture;
 }
 
 function initBuffers(gl) {
@@ -283,16 +337,6 @@ function initBuffers(gl) {
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE,
     new Uint8Array([193, 68, 14, 255]));
 
-  var image = new Image();
-  image.src = "earth_texture_3d.png";
-  image.crossOrigin = "anonymous";
-  image.onload = function () {
-    gl.bindTexture(gl.TEXTURE_2D, earthTexture);
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-    gl.generateMipmap(gl.TEXTURE_2D);
-  }
-
   return {
     position: vertexBuffer,
     indices: indexBuffer,
@@ -305,7 +349,7 @@ function initBuffers(gl) {
 
 }
 
-function drawScene(gl, programInfo, buffers, objInfo) {
+function drawScene(gl, programInfo, buffers, texture, objInfo) {
 
   const fieldOfView = glMatrix.toRadian(45);
   const aspectRation = gl.canvas.clientWidth / gl.canvas.clientHeight;
@@ -319,14 +363,7 @@ function drawScene(gl, programInfo, buffers, objInfo) {
   mat4.lookAt(viewMatrix, [0.0, 50.0, 0.0], [0, -100.0, 0.0], [0, 0, 1]);
 
   var modelMatrix = mat4.create();
-  mat4.translate(modelMatrix, modelMatrix, [0, 0, -50]);
-
-  const normalMatrix = mat4.create();
-  const modelViewMatrix = mat4.create();
-  mat4.multiply(modelViewMatrix, modelMatrix, viewMatrix);
-  mat4.invert(normalMatrix, modelViewMatrix);
-  mat4.transpose(normalMatrix, normalMatrix);
-
+  mat4.translate(modelMatrix, modelMatrix, [0, 0, -150]);
 
 
   if(!(objInfo.starName === 'Sun')) {
@@ -334,12 +371,23 @@ function drawScene(gl, programInfo, buffers, objInfo) {
     const x = centerX * Math.cos(objInfo.angle) * objInfo.xRadius;
     const z = centerY * -Math.sin(objInfo.angle) * objInfo.zRadius;
 
-    // mat4.translate(modelMatrix, modelMatrix, [x, z, 0]);
-    mat4.translate(modelMatrix, modelMatrix, [x, 0, z]);
-    //
-    // var v = objInfo.scale;
-    // mat4.scale(modelMatrix, modelMatrix, [v,v,v]);
+    mat4.translate(modelMatrix, modelMatrix, [x, z, 0]);
+    // mat4.translate(modelMatrix, modelMatrix, [x, 0, z]);
+    var v = objInfo.scale;
+    mat4.scale(modelMatrix, modelMatrix, [v,v,v]);
+
+
   }
+
+  // modelMatrix[0] *= v;
+  // modelMatrix[5] *= v;
+  // modelMatrix[10] *= v;
+
+  const normalMatrix = mat4.create();
+  const modelViewMatrix = mat4.create();
+  mat4.multiply(modelViewMatrix, modelMatrix, viewMatrix);
+  mat4.invert(normalMatrix, modelViewMatrix);
+  mat4.transpose(normalMatrix, normalMatrix);
 
   sphereRotation += objInfo.deltaTime;
 
@@ -396,6 +444,11 @@ function drawScene(gl, programInfo, buffers, objInfo) {
   gl.uniformMatrix4fv(programInfo.uniformLocations.u_ViewMatrix,
     false, viewMatrix);
 
+
+    gl.activeTexture(gl.TEXTURE0);
+
+  // Bind the texture to texture unit 0
+  gl.bindTexture(gl.TEXTURE_2D, texture);
 
   gl.drawElements(gl.TRIANGLES, 5400, gl.UNSIGNED_SHORT, 0);
 }

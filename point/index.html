@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lighting Cube</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+    canvas {
+      display: block;
+      position: absolute;
+      margin: 0 auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .box {
+      position: absolute;
+      color: #009900;
+      top: 10px;
+      left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">fps: <span id="fps"></span></div>
+  <canvas id="webgl"></canvas>
+
+
+<script src="../utils/utils.js" charset="utf-8"></script>
+<script src="../utils/glMatrix.js" charset="utf-8"></script>
+<script src="app.js" charset="utf-8"></script>
+</body>
+</html>
