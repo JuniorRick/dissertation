@@ -37,8 +37,8 @@ function main() {
       a_Position: gl.getAttribLocation(program, 'a_Position'),
     },
   }
-  const buffers = quad(gl);
-  const buffers = ellipse(gl);
+  // const buffers = quad(gl);
+  const buffers = donut(gl);
 
   window.addEventListener('resize', resize);
 
@@ -65,6 +65,6 @@ function draw(gl, buffers, programInfo) {
 gl.vertexAttribPointer(programInfo.attributes.a_Position,
    2, gl.FLOAT, false, 0, 0);
 gl.enableVertexAttribArray(programInfo.attributes.a_Position);
-gl.drawArrays(gl.TRIANGLES, 0, buffers.vertices_length);
-// gl.drawElements(gl.TRIANGLES, buffers.indices_length, gl.UNSIGNED_SHORT, 0);
+// gl.drawArrays(gl.TRIANGLES, 0, buffers.vertices_length);
+gl.drawElements(gl.TRIANGLES, buffers.indices_length, gl.UNSIGNED_SHORT, 0);
 }
