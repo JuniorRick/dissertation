@@ -6,6 +6,8 @@ function main() {
 
   var canvas = webGlUtils.getCanvas("#webgl");
 
+  // var gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+  
   var gl = webGlUtils.getContext(canvas);
   if(!gl) {
     console.log("Unable to initialize webgl context");
@@ -37,8 +39,9 @@ function main() {
       a_Position: gl.getAttribLocation(program, 'a_Position'),
     },
   }
-  // const buffers = quad(gl);
-  const buffers = donut(gl);
+  const buffers = quad(gl);
+  // const buffers = donut(gl);
+  // const buffers = ellipse(gl);
 
   window.addEventListener('resize', resize);
 
@@ -48,8 +51,8 @@ function main() {
 
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   function render() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+    width = canvas.width = 600;
+    height = canvas.height = 600;
     gl.viewport(0, 0, width, height);
     gl.clear(gl.COLOR_BUFFER_BIT);
     draw(gl, buffers, programInfo);

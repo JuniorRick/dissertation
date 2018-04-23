@@ -36,7 +36,7 @@ function ellipse(gl) {
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
 
   return {
-    square: vertexBuffer,
+    vertices: vertexBuffer,
     indices: indexBuffer,
     vertices_length: vertices.length / 2,
     indices_length: indices.length,
