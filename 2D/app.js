@@ -7,7 +7,7 @@ function main() {
   var canvas = webGlUtils.getCanvas("#webgl");
 
   // var gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-  
+
   var gl = webGlUtils.getContext(canvas);
   if(!gl) {
     console.log("Unable to initialize webgl context");
@@ -29,6 +29,7 @@ function main() {
     }
   `;
 
+  console.log("10" +  20 + 30)
   var program = webGlUtils.initShaderProgram(gl, vertexSource, fragmentSource);
 
   gl.useProgram(program);

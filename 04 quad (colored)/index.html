@@ -14,15 +14,21 @@
 
       const vertexSource = `
         attribute vec3 a_Position;
+        attribute vec3 a_Color;
+
+        varying vec3 v_Color;
 
         void main() {
             gl_Position = vec4(a_Position, 1.0);
+            v_Color = a_Color;
         }
       `;
 
       const fragmentSource = `
+      varying highp vec3 v_Color;
+
         void main() {
-            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); //coloarea alba
+            gl_FragColor = vec4(v_Color, 1.0); //per-vertex color
         }
       `;
 
@@ -42,40 +48,58 @@
 
       gl.linkProgram(program);
 
-      //cream un buffer ce va contine pozitia tringhiului
       const positionBuffer = gl.createBuffer();
-
-      //selectam buffer-ul la care vom aplica toate operatiile
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-      //vertices este array-ul cu pozitia triunghiului
       const vertices = [
-        -0.5, -0.5, 0.0,
-        0.0, 0.5, 0.0,
-        0.5, -0.5, 0.0,
+        -0.5, -0.5, 0.0, //vertex 1
+        -0.5, 0.5, 0.0,  //vertex 2
+        0.5, 0.5, 0.0,   //vertex 3
+        0.5, -0.5, 0.0,  //vertex 4
       ];
 
-      //trecem lista de pozitii in WebGL pentru a construi figura.
-      //umplem buffer-ul cu array de tip Float32Array
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 
-      //obtinem locatia atributului a_Position in shader
-      const a_Position = gl.getAttribLocation(program, 'a_Position');
+      const indexBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 
-      //indicam cum WebGl va transmite (per-vertex) positiile in a_Position
+      const indices = [
+        0, 1, 2, //primul triunghi
+        0, 2, 3, //al doilea triunghi
+      ];
+
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+
+      const colorBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+
+      const colors = [
+        1.0, 0.0, 0.0,   //rosu
+        0.0, 1.0, 0.0,   //verde
+        0.0, 0.0, 1.0,   //albastru
+        1.0, 1.0, 0.0,  //galben
+      ];
+
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      const a_Position = gl.getAttribLocation(program, 'a_Position');
       gl.vertexAttribPointer(a_Position, 3, gl.FLOAT, false, 0, 0);
       gl.enableVertexAttribArray(a_Position);
 
-      //programul utilizat de WebGL in monentul desenarii
+      gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+      const a_Color = gl.getAttribLocation(program, 'a_Color');
+      gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, 0, 0);
+      gl.enableVertexAttribArray(a_Color);
+
       gl.useProgram(program);
 
-      //culoar de curatare a canvasului
       gl.clearColor(0.0, 0.5, 0.5, 1);
-
-      //curatam canvasul inainte de a desena pe el
       gl.clear(gl.COLOR_BUFFER_BIT);
 
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      // gl.drawArrays(gl.TRIANGLES, 0, 3);
+      gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
 
     </script>
 </body>
