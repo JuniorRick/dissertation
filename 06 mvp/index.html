@@ -25,7 +25,8 @@
         varying vec3 v_Color;
 
         void main() {
-            gl_Position = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * vec4(a_Position, 1.0);
+            gl_Position = v_ProjectionMatrix * v_ViewMatrix *
+              v_ModelMatrix * vec4(a_Position, 1.0);
             v_Color = a_Color;
         }
       `;
@@ -101,16 +102,11 @@
       const up = [0.0, 1.0, 1.0];
       mat4.lookAt(viewMatrix, eye, center, up);
 
-      const modelMatrix = mat4.create();
-      mat4.translate(modelMatrix, modelMatrix, [1.0, 1.0, -3.0]);
-
       const u_ProjectionMatrix = gl.getUniformLocation(program, 'u_ProjectionMatrix');
       const u_ViewMatrix = gl.getUniformLocation(program, 'u_ViewMatrix');
-      const u_ModelMatrix = gl.getUniformLocation(program, 'u_ModelMatrix');
+      const u_ModelMatrix = gl.getUniformLocation(program, 'u_ModelMAtrix');
 
-      gl.uniformMatrix4fv(u_ProjectionMatrix, false, projectionMatrix);
-      gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix);
-      gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix);
+
 
       gl.clearColor(0.0, 0.5, 0.5, 1);
       gl.clear(gl.COLOR_BUFFER_BIT);
