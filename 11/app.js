@@ -1,9 +1,16 @@
 
 window.onload = main;
 
+var width = 300;
+var height = 300;
+
+
 function main() {
   var canvas = document.querySelector('#glCanvas');
   var gl = webGlUtils.getContext(canvas);
+
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
 
   const vertexSource = `
     attribute vec3 a_Position;
@@ -63,11 +70,7 @@ function main() {
     indexBuffer = buffers.cube(gl).indices;
     textureCoordBuffer = buffers.cube(gl).texture;
 
-    const texture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA,
-      gl.UNSIGNED_BYTE, new Uint8Array([0,255,255,255]));
+    const texture = webGlUtils.loadTexture(gl, 'cube.jpg');
 
     const a_Position = gl.getAttribLocation(program, 'a_Position');
     const a_TextureCoord = gl.getAttribLocation(program, 'a_TextureCoord');
@@ -133,7 +136,9 @@ function main() {
 
 
     gl.clearColor(0.0, 0.5, 0.5, 1);
+    gl.clearDepth(1.0);
     gl.enable(gl.DEPTH_TEST);
+    gl.depthFunc(gl.LEQUAL);
 
     var rotate = 0.0;
     var then = 0.0;
@@ -153,6 +158,8 @@ function main() {
 
       gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix);
       gl.uniformMatrix4fv(u_NormalMatrix, false, normalMatrix);
+
+      gl.viewport(0, 0, width, height);
 
       gl.clear(gl.COLOR_BUFFER_BIT);
       const vertexCount = 36;
