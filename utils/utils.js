@@ -10,7 +10,7 @@ webGlUtils = function () {
       }
 
       return null;
-  }
+  };
 
   var getContext = function(canvas) {
 
@@ -25,7 +25,7 @@ webGlUtils = function () {
     }
 
     return context;
-  }
+  };
 
   var initShaderProgram = function (gl, vertexSource, fragmentSource) {
     const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vertexSource);
@@ -43,7 +43,7 @@ webGlUtils = function () {
 
       console.log("Error linking program: " + gl.getProgramInfoLog(program));
       return null;
-  }
+  };
 
   function loadShader(gl, type, source) {
     const shader = gl.createShader(type);
@@ -65,5 +65,5 @@ webGlUtils = function () {
     getCanvas: getCanvas,
     getContext: getContext,
     initShaderProgram: initShaderProgram,
-  }
+  };
 }();
