@@ -4,6 +4,23 @@ window.onload = main;
 var width = 300;
 var height = 300;
 
+var randPos = [];
+
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
+const MIN = -50;
+const MAX = 50;
+const MIN_Z = -500;
+const MAX_Z = -10;
+const N = 5000;
+for(let ii = 0; ii < N; ii++) {
+  let x = random(MIN, MAX);
+  let y = random(MIN, MAX);
+  let z = random(MIN_Z, MAX_Z);
+
+  randPos.push({x: x, y: y, z: z});
+}
 
 function main() {
   var canvas = document.querySelector('#glCanvas');
@@ -99,7 +116,7 @@ function main() {
     const fieldOfView = glMatrix.toRadian(45);
     const aspect = canvas.width / canvas.height;
     const zNear = 0.1;
-    const zFar = 100;
+    const zFar = 1000;
     mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
 
     const viewMatrix = mat4.create();
@@ -142,30 +159,46 @@ function main() {
 
     var rotate = 0.0;
     var then = 0.0;
+    var timeLapse = 0;
+    const fpsElem = document.querySelector("#fps");
+
     function render(now){
 
       now *= 0.001;
       let deltaTime = now - then;
       then = now;
-      const modelMatrix = mat4.create();
-      mat4.translate(modelMatrix, modelMatrix, [0.0, 0.0, -3.0]);
-      mat4.rotate(modelMatrix, modelMatrix, rotate, [0.0, 1.0, 0.0]);
-      mat4.rotate(modelMatrix, modelMatrix, rotate * 0.5, [1.0, 1.0, 0.0]);
+      const fps = 1 / deltaTime;             // compute frames per second
 
-      const normalMatrix = mat4.create();
-      mat4.invert(normalMatrix, modelMatrix);
-      mat4.transpose(normalMatrix, normalMatrix);
+      if(now - timeLapse > 1) {
+        fpsElem.textContent = fps.toFixed(1);
+        timeLapse = now;
+      }
 
-      gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix);
-      gl.uniformMatrix4fv(u_NormalMatrix, false, normalMatrix);
-
-      gl.viewport(0, 0, width, height);
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      gl.viewport(0, 0, canvas.width, canvas.height);
 
       gl.clear(gl.COLOR_BUFFER_BIT);
       const vertexCount = 36;
       const type = gl.UNSIGNED_SHORT;
       const offset = 0;
-      gl.drawElements(gl.TRIANGLES, vertexCount, type, offset);
+
+      for(let ii = 0; ii < N; ii++) {
+        const modelMatrix = mat4.create();
+        mat4.translate(modelMatrix, modelMatrix, [0.0, 0.0, -50.0]);
+        mat4.translate(modelMatrix, modelMatrix, [randPos[ii].x, randPos[ii].y, randPos[ii].z]);
+        mat4.rotate(modelMatrix, modelMatrix, rotate, [0.0, 1.0, 0.0]);
+        mat4.rotate(modelMatrix, modelMatrix, randPos[ii].x, [1.0, 1.0, 0.0]);
+
+        const normalMatrix = mat4.create();
+        mat4.invert(normalMatrix, modelMatrix);
+        mat4.transpose(normalMatrix, normalMatrix);
+
+        gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix);
+        gl.uniformMatrix4fv(u_NormalMatrix, false, normalMatrix);
+
+        gl.drawElements(gl.TRIANGLES, vertexCount, type, offset);
+      }
 
       rotate += deltaTime;
       requestAnimationFrame(render);
