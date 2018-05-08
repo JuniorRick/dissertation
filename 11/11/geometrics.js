@@ -100,17 +100,16 @@ buffers = function () {
       position: positionBuffer,
       indices: indexBuffer,
       texture: textureCoordBuffer,
-      len: 36,
     };
 
   };
 
   //sphere buffer
   var sphere = function(gl) {
-    const vertices = [];
-    const textureCoordinates = [];
-    const lat = 30;
-    const long = 30;
+    var vertices = [];
+
+    var lat = 30,
+        long = 30;
 
     var radius = 3;
     let r = Math.random(),
@@ -143,51 +142,48 @@ buffers = function () {
         let u = 1 - (j / long);
         let v = 1 - (i / lat);
 
-        textureCoordinates.push(u);
-        textureCoordinates.push(v);
+        vertices.push(u);
+        vertices.push(v);
 
 
       }
     }
 
-    var indices = [];
+    var indexCoord = [];
 
     for(let j = 0; j < lat; j++) {
       for(let i = 0; i < long; i++) {
         let first = j + i * (long + 1);
         let second = first + long + 1;
 
-        indices.push(first);
-        indices.push(second);
-        indices.push(first + 1);
+        indexCoord.push(first);
+        indexCoord.push(second);
+        indexCoord.push(first + 1);
 
-        indices.push(second);
-        indices.push(second + 1);
-        indices.push(first + 1);
+        indexCoord.push(second);
+        indexCoord.push(second + 1);
+        indexCoord.push(first + 1);
 
       }
     }
 
-    const positionBuffer = gl.createBuffer();
+    var positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 
-    const indexBuffer = gl.createBuffer();
+    var indexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STREAM_DRAW);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indexCoord), gl.STREAM_DRAW);
 
-    const textureCoordBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, textureCoordBuffer);
-
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoordinates),
-                  gl.STATIC_DRAW);
-
+    var textureCoordBuffer = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, textureCoordBuffer);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE,
+      new Uint8Array([253, 184, 19, 255]));
 
     return {
       position: positionBuffer,
       indices: indexBuffer,
       texture: textureCoordBuffer,
-      len: 5400,
     };
 
   };
@@ -196,7 +192,6 @@ buffers = function () {
 
   return {
     cube: cube,
-    sphere: sphere,
   };
 
 }();

@@ -104,10 +104,9 @@ function main() {
       },
     };
 
-    const positionBuffer = buffers.sphere(gl).position;
-    const indexBuffer = buffers.sphere(gl).indices;
-    const textureCoordBuffer = buffers.sphere(gl).texture;
-    const vertexCount = buffers.sphere(gl).len;
+    positionBuffer = buffers.cube(gl).position;
+    indexBuffer = buffers.cube(gl).indices;
+    textureCoordBuffer = buffers.cube(gl).texture;
 
     const texture = webGlUtils.loadTexture(gl, 'cube.jpg');
 
@@ -192,6 +191,7 @@ function main() {
       gl.viewport(0, 0, canvas.width, canvas.height);
 
       gl.clear(gl.COLOR_BUFFER_BIT);
+      const vertexCount = 36;
       const type = gl.UNSIGNED_SHORT;
       const offset = 0;
 
