@@ -100,15 +100,29 @@ webGlUtils = function () {
     return texture;
   }
 
+
   function isPowerOf2(value) {
     return (value & (value - 1)) == 0;
   }
 
-  
+  var resize = function(gl, canvas) {
+
+   var pixelRatio = window.devicePixelRatio ? window.devicePixelRatio : 1.0;
+
+   if (((canvas.width  / pixelRatio) != canvas.offsetWidth ) ||
+       ((canvas.height / pixelRatio) != canvas.offsetHeight)) {
+
+    canvas.width  = pixelRatio * canvas.offsetWidth ;
+    canvas.height = pixelRatio * canvas.offsetHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+   }
+ }
+
   return {
     getCanvas: getCanvas,
     getContext: getContext,
     initShaderProgram: initShaderProgram,
     loadTexture: loadTexture,
+    resize: resize,
   };
 }();

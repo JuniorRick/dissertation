@@ -13,7 +13,7 @@ const MIN = -50;
 const MAX = 50;
 const MIN_Z = -500;
 const MAX_Z = -10;
-const N = 10;
+const N = 100;
 for(let ii = 0; ii < N; ii++) {
   let x = random(MIN, MAX);
   let y = random(MIN, MAX);
@@ -84,6 +84,7 @@ function main() {
     const program = webGlUtils.initShaderProgram(gl, vertexSource, fragmentSource);
 
     const programInfo = {
+      program: program,
       attribLocations: {
         a_Position: gl.getAttribLocation(program, 'a_Position'),
         a_TextureCoord: gl.getAttribLocation(program, 'a_TextureCoord'),
