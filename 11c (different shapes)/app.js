@@ -189,9 +189,6 @@ function main() {
   var then = 0;
   var timeLapse = 0;
   // Draw the scene repeatedly
-  var lastWidth = window.innerWidth;
-  var lastHeight = window.innerHeight;
-
   const fpsElem = document.querySelector("#fps");
   function render(now) {
     now *= 0.001;
@@ -203,14 +200,6 @@ function main() {
       fpsElem.textContent = fps.toFixed(1);
       timeLapse = now;
     }
-    
-    //mobile rotation reprojection
-    if(lastWidth != window.innerWidth || lastHeight != window.innerHeight) {
-      projection(gl, canvas, programInfo);
-      lastWidth = window.innerWidth;
-      lastHeight = window.innerHeight;
-    }
-
     drawScene(gl, vertexCount, programInfo, texture, deltaTime);
 
     requestAnimationFrame(render);

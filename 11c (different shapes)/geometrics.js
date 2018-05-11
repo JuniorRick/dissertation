@@ -109,8 +109,8 @@ buffers = function () {
   var sphere = function(gl) {
     const vertices = [];
     const textureCoordinates = [];
-    const lat = 15;
-    const long = 15;
+    const lat = 30;
+    const long = 30;
 
     var radius = 3;
     let r = Math.random(),
@@ -187,7 +187,7 @@ buffers = function () {
       position: positionBuffer,
       indices: indexBuffer,
       texture: textureCoordBuffer,
-      len: lat * long * 6,
+      len: 5400,
     };
 
   };
