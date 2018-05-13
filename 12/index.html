@@ -7,24 +7,24 @@
     <title>Document</title>
 </head>
 <style>
-  html, body { height: 100%; }
-  body { margin: 0; }
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
 
   canvas {
     display: block;
-    width: 100%; height: 100%;
-    background: #888;
   }
 
   .box {
     position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 100px;
+    padding: 5px;
+    border-radius: 3px;
     color: #000;
     top: 10px;
     left: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 5px;
-    width: 80px;
-    border-radius: 3px;
   }
 
 </style>
@@ -34,17 +34,8 @@
 
   <script src="../utils/glMatrix.js" charset="utf-8"></script>
   <script src="../utils/utils.js" charset="utf-8"></script>
-  <!-- <script src="app.js" charset="utf-8"></script> -->
-  <!-- <script src="geometrics.js" charset="utf-8"></script> -->
-  <script>
-  console.log("outside");
-  (function(root, factory) {
-
-  }(this, function() {
-    "use strict";
-    console.log('it works');
-  }));
-  </script>
+  <script src="app.js" charset="utf-8"></script>
+  <script src="geometrics.js" charset="utf-8"></script>
 
 </body>
 </html>
