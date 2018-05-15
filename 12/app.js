@@ -10,9 +10,9 @@ function random(min, max) {
 }
 const MIN = -50;
 const MAX = 50;
-const MIN_Z = -500;
-const MAX_Z = -10;
-const N = 1000;
+const MIN_Z = -200;
+const MAX_Z = -5;
+const N = 100;
 for(let ii = 0; ii < N; ii++) {
   let x = random(MIN, MAX);
   let y = random(MIN, MAX);
@@ -104,6 +104,18 @@ function main() {
       },
     };
 
+    const sphereVAO = gl.createVertexArray();
+    gl.bindVertexArray(sphereVAO);
+    const sphereBuffer = buffers.sphere(gl);
+    setBuffersAndAttributes(gl, sphereBuffer, programInfo);
+    gl.bindVertexArray(null);
+
+
+    const cubeVAO = gl.createVertexArray();
+    gl.bindVertexArray(cubeVAO);
+    const cubeBuffer = buffers.cube(gl);
+    setBuffersAndAttributes(gl, cubeBuffer, programInfo);
+    gl.bindVertexArray(null);
 
     const sphereTexture = webGlUtils.loadTexture(gl, 'sphere.jpg');
     const cubeTexture = webGlUtils.loadTexture(gl, 'cube.jpg');
@@ -185,9 +197,9 @@ function main() {
         gl.uniformMatrix4fv(programInfo.uniformLocations.u_NormalMatrix,
           false, normalMatrix);
 
-        const sphereBuffer = buffers.sphere(gl);
-        setBuffersAndAttributes(gl, sphereBuffer, programInfo);
+        gl.bindVertexArray(sphereVAO);
         gl.drawElements(gl.TRIANGLES, sphereBuffer.len, type, offset);
+        gl.bindVertexArray(null);
 
       }
 
@@ -199,6 +211,7 @@ function main() {
         const modelMatrix = mat4.create();
         mat4.translate(modelMatrix, modelMatrix, [0.0, 0.0, -50.0]);
         mat4.translate(modelMatrix, modelMatrix, [randPos[ii].y, randPos[ii].x, randPos[ii].z]);
+        mat4.scale(modelMatrix, modelMatrix, [2,2,2]);
         mat4.rotate(modelMatrix, modelMatrix, rotate, [0.0, 1.0, 0.0]);
         mat4.rotate(modelMatrix, modelMatrix, randPos[ii].x, [1.0, 1.0, 0.0]);
 
@@ -211,9 +224,9 @@ function main() {
         gl.uniformMatrix4fv(programInfo.uniformLocations.u_NormalMatrix,
           false, normalMatrix);
 
-        const cubeBuffer = buffers.cube(gl);
-        setBuffersAndAttributes(gl, cubeBuffer, programInfo);
+        gl.bindVertexArray(cubeVAO);
         gl.drawElements(gl.TRIANGLES, cubeBuffer.len, type, offset);
+        gl.bindVertexArray(null);
 
       }
 
