@@ -12,7 +12,7 @@ const MIN = -50;
 const MAX = 50;
 const MIN_Z = -200;
 const MAX_Z = -5;
-const N = 100;
+const N = 500 //*2;
 for(let ii = 0; ii < N; ii++) {
   let x = random(MIN, MAX);
   let y = random(MIN, MAX);
@@ -137,8 +137,8 @@ function main() {
     mat4.lookAt(viewMatrix, eye, center, up);
 
     gl.uniform3f(programInfo.uniformLocations.u_DiffuseLight, 1.0, 1.0, 1.0);
-    gl.uniform3f(programInfo.uniformLocations.u_AmbientLight, 0.3, 0.3, 0.3);
-    gl.uniform3f(programInfo.uniformLocations.u_LightPosition, 1.0, 0.0, -1.3);
+    gl.uniform3f(programInfo.uniformLocations.u_AmbientLight, 0.1, 0.1, 0.1);
+    gl.uniform3f(programInfo.uniformLocations.u_LightPosition, 50.0, 0.0, -24.3);
 
 
     gl.uniformMatrix4fv(programInfo.uniformLocations.u_ProjectionMatrix,

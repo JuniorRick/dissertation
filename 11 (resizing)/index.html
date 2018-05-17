@@ -7,12 +7,31 @@
     <title>Document</title>
 </head>
 <body>
-    <canvas id="glCanvas" width="800" height="600"></canvas>
+    <style>
+      body {
+        margin: 0;
+      }
+      #glCanvas {
+        width: 100vw;
+        height: 100vh;
+        display: block;
+      }
+    </style>
+
+    <canvas id="glCanvas"></canvas>
+    <!-- <canvas id="glCanvas"  width="20" height="15" style="width: 400; height: 300;"></canvas> -->
+
 
     <script src="glMatrix.js" charset="utf-8"></script>
+
     <script>
       var canvas = document.querySelector('#glCanvas');
+
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+
       var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
 
       const vertexSource = `
         attribute vec3 a_Position;
@@ -245,10 +264,6 @@
       const up = [0.0, 1.0, 1.0];
       mat4.lookAt(viewMatrix, eye, center, up);
 
-
-
-
-
       const u_ProjectionMatrix = gl.getUniformLocation(program, 'u_ProjectionMatrix');
       const u_ViewMatrix = gl.getUniformLocation(program, 'u_ViewMatrix');
       const u_ModelMatrix = gl.getUniformLocation(program, 'u_ModelMatrix');
@@ -280,11 +295,25 @@
 
       var rotate = 0.0;
       var then = 0.0;
+
       function render(now){
+
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+        const fieldOfView = glMatrix.toRadian(45);
+        const aspect = canvas.width / canvas.height;
+        const zNear = 0.1;
+        const zFar = 100;
+        mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
+
+        gl.uniformMatrix4fv(u_ProjectionMatrix, false, projectionMatrix);
 
         now *= 0.001;
         let deltaTime = now - then;
         then = now;
+
         const modelMatrix = mat4.create();
         mat4.translate(modelMatrix, modelMatrix, [0.0, 0.0, -3.0]);
         mat4.rotate(modelMatrix, modelMatrix, rotate, [0.0, 1.0, 0.0]);
