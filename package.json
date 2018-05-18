@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/JuniorRick/dissertation/issues"
   },
-  "homepage": "https://github.com/JuniorRick/dissertation#readme"
+  "homepage": "https://github.com/JuniorRick/dissertation#readme",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
 }
