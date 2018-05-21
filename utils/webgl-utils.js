@@ -2,16 +2,6 @@
 
 webGlUtils = function () {
 
-  var getCanvas = function(selector) {
-      var canvas = document.querySelector(selector);
-
-      if(canvas.getContext) {
-        return canvas;
-      }
-
-      return null;
-  };
-
   var getContext = function(canvas) {
 
     var names = ["webgl2", "webgl", "experimental-web"];
@@ -118,7 +108,6 @@ webGlUtils = function () {
  }
 
   return {
-    getCanvas: getCanvas,
     getContext: getContext,
     initShaderProgram: initShaderProgram,
     loadTexture: loadTexture,

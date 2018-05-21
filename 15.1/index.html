@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+  body {
+    margin: 0;
+  }
+  canvas {
+    display: block;
+  }
+  .box {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 200px;
+    padding: 5px;
+    border-radius: 3px;
+    color: #000;
+    top: 10px;
+    left: 10px;
+    font-size: 2em;
+  }
+</style>
+<body>
+  <div class="box">
+    <div id="counter"></div>
+    <div id="fps"></div>
+  </div>
+  <canvas id="glCanvas"></canvas>
+  <script src="../utils/glMatrix.js" charset="utf-8"></script>
+  <script src="../utils/webgl-utils.js" charset="utf-8"></script>
+  <script src="../utils/primitives.js" charset="utf-8"></script>
+  <script src="app.js" charset="utf-8"></script>
+</body>
+</html>
