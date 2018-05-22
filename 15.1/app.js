@@ -18,7 +18,7 @@ const MIN = -50;
 const MAX = 50;
 const MIN_Z = -500;
 const MAX_Z = -5;
-const N = 500;
+const N = 500; // *2
 for(let ii = 0; ii < N; ii++) {
   let x = random(MIN, MAX);
   let y = random(MIN, MAX);
@@ -128,9 +128,9 @@ function main() {
 
   const viewMatrix = mat4.create();
   const eye =  [0.0, 0.0, 3.0];
-  const center = [0.0, 0.0, -10.0];
+  const target = [0.0, 0.0, -10.0];
   const up = [0.0, 1.0, 1.0];
-  mat4.lookAt(viewMatrix, eye, center, up);
+  mat4.lookAt(viewMatrix, eye, target, up);
 
 
   gl.uniform3f(programInfo.uniformLocations.u_DiffuseLight, 1.0, 1.0, 1.0);

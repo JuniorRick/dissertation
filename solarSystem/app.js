@@ -16,7 +16,7 @@ var MARS_ROTATION_SPEED = 0.018 * speed;
 
 function main() {
 
-  var canvas = webGlUtils.getCanvas("#webgl");
+  var canvas = document.querySelector("#webgl");
 
   var gl = webGlUtils.getContext(canvas);
   if(!gl) {
@@ -384,9 +384,9 @@ function drawScene(gl, programInfo, buffers, texture, objInfo) {
   // modelMatrix[10] *= v;
 
   const normalMatrix = mat4.create();
-  const modelViewMatrix = mat4.create();
-  mat4.multiply(modelViewMatrix, modelMatrix, viewMatrix);
-  mat4.invert(normalMatrix, modelViewMatrix);
+  // const modelViewMatrix = mat4.create();
+  // mat4.multiply(modelViewMatrix, modelMatrix, viewMatrix);
+  mat4.invert(normalMatrix, modelMatrix);
   mat4.transpose(normalMatrix, normalMatrix);
 
   sphereRotation += objInfo.deltaTime;

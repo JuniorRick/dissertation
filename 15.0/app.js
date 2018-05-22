@@ -217,7 +217,7 @@ function drawScene(gl, programInfo, deltaTime) {
         false, normalMatrix);
 
       const sphereBuffer = buffers.sphere(gl);
-      setBuffersAndAttributes(gl, sphereBuffer, programInfo);s
+      setBuffersAndAttributes(gl, sphereBuffer, programInfo);
 
       gl.activeTexture(gl.TEXTURE0);
       gl.bindTexture(gl.TEXTURE_2D, sphereTexture);
