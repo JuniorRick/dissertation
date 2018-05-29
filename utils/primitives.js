@@ -157,13 +157,13 @@ buffers = function () {
         let first = j + i * (long + 1);
         let second = first + long + 1;
 
-        indices.push(first);
         indices.push(second);
         indices.push(first + 1);
-
-        indices.push(second);
         indices.push(second + 1);
+
+        indices.push(first);
         indices.push(first + 1);
+        indices.push(second);
 
       }
     }

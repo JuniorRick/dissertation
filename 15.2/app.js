@@ -162,10 +162,10 @@ function main() {
       false, viewMatrix);
 
 
-    gl.clearColor(0.0, 0.5, 0.5, 1);
+    gl.clearColor(0.0, 1.0, 1.0, 1);
     gl.clearDepth(1.0);
     gl.enable(gl.DEPTH_TEST);
-    gl.depthFunc(gl.LEQUAL);
+    gl.enable(gl.CULL_FACE);
 
     var rotate = 0.0;
     var then = 0.0;
@@ -203,7 +203,6 @@ function main() {
 
       requestAnimationFrame(render);
     }
-
     requestAnimationFrame(render);
 }
 
