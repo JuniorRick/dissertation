@@ -364,15 +364,15 @@ function drawScene(gl, programInfo, buffers, texture, objInfo) {
 
   var modelMatrix = mat4.create();
   mat4.translate(modelMatrix, modelMatrix, [0, 0, -150]);
-
+  mat4.rotate(modelMatrix, modelMatrix, glMatrix.toRadian(20), [1.0, 0.0, 0.0]);
 
   if(!(objInfo.starName === 'Sun')) {
 
     const x = centerX * Math.cos(objInfo.angle) * objInfo.xRadius;
     const z = centerY * -Math.sin(objInfo.angle) * objInfo.zRadius;
 
-    mat4.translate(modelMatrix, modelMatrix, [x, z, 0]);
-    // mat4.translate(modelMatrix, modelMatrix, [x, 0, z]);
+    // mat4.translate(modelMatrix, modelMatrix, [x, z, 0]);
+    mat4.translate(modelMatrix, modelMatrix, [x, 0, z]);
     var v = objInfo.scale;
     mat4.scale(modelMatrix, modelMatrix, [v,v,v]);
 
