@@ -11,7 +11,8 @@
   <style>
     html,
     body {
-      margin: 0px;
+      margin: 0;
+      padding: 0;
       height: 100vh;
     }
   </style>
@@ -21,18 +22,110 @@
 
   <section class="section">
 
-    <div class="container  main-page">
+    <div id="main-page">
       <h2 class="content">
         CERCETAREA METODELOR DE OPTIMIZARE A
         PROGRAMĂRII GRAFICE 3D ÎN WEBGL
       </h2>
-      <a href="#page-2"><div class="arrow arrow-right"></div></a>
+      <a id="from-main-page" href="#page-2">
+        <div class="arrow arrow-right"></div>
+      </a>
     </div>
 
+    <div class="container" id="page-2">
+      <h1 class="title">Grafica în browser</h1>
+      <h2 class="content">
+        <div class="grid-container grid-2">
+            <div class="grid-item">content 1</div>
+            <div class="grid-item">content 2</div>
+            <div class="grid-item">content 3</div>
+            <div class="grid-item">content 4</div>
+        </div>
+      </h2>
+      <a id="to-main-page" href="#main-page">
+        <div class="arrow arrow-left"></div>
+      </a>
+      <a href="#page-3"><div class="arrow arrow-right"></div></a>
+    </div>
 
+    <div class="container" id="page-3">
+      <h2 class="content">
+        Pagina 3. CERCETAREA METODELOR DE OPTIMIZARE A
+        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
+      </h2>
+      <a href="#page-2"><div class="arrow arrow-left"></div></a>
+      <a href="#page-4"><div class="arrow arrow-right"></div></a>
+    </div>
+
+    <div class="container" id="page-4">
+      <h2 class="content">
+        Pagina 4. CERCETAREA METODELOR DE OPTIMIZARE A
+        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
+      </h2>
+      <a href="#page-3"><div class="arrow arrow-left"></div></a>
+      <a href="#page-5"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-5">
+      <h2 class="content">
+        Pagina 5. CERCETAREA METODELOR DE OPTIMIZARE A
+        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
+      </h2>
+      <a href="#page-4"><div class="arrow arrow-left"></div></a>
+      <a href="#page-6"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-6">
+      <h2 class="content">
+        Pagina 6. CERCETAREA METODELOR DE OPTIMIZARE A
+        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
+      </h2>
+      <a href="#page-5"><div class="arrow arrow-left"></div></a>
+      <a href="#page-7"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-7">
+      <h2 class="content">
+        Pagina 7. CERCETAREA METODELOR DE OPTIMIZARE A
+        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
+      </h2>
+      <a href="#page-6"><div class="arrow arrow-left"></div></a>
+      <a href="#page-8"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-8">
+      <h2 class="content">
+        Pagina 8. CERCETAREA METODELOR DE OPTIMIZARE A
+        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
+      </h2>
+      <a href="#page-7"><div class="arrow arrow-left"></div></a>
+      <a href="#page-9"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-9">
+      <h2 class="content">
+        Pagina 9. CERCETAREA METODELOR DE OPTIMIZARE A
+        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
+      </h2>
+      <a href="#page-8"><div class="arrow arrow-left"></div></a>
+      <a href="#page-10"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-10">
+      <h2 class="content">
+        Pagina 10. CERCETAREA METODELOR DE OPTIMIZARE A
+        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
+      </h2>
+      <a href="#page-9"><div class="arrow arrow-left"></div></a>
+      <a href="#page-11"><div class="arrow arrow-right"></div></a>
+    </div>
   </section>
 
+<script>
 
+  document.querySelector("#from-main-page").addEventListener("click", function() {
+    document.querySelector("#main-page").style.display = "none";
+  });
+
+  document.querySelector("#to-main-page").addEventListener("click", function() {
+    document.querySelector("#main-page").style.display = "flex";
+  });
+
+</script>
 
 </body>
 

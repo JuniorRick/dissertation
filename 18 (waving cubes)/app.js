@@ -1,26 +1,14 @@
 
 window.onload = main;
 
-var width = 1000;
-var height = 2000;
+var width =1000;
+var height = 1000;
 var rotate = 0.0;
 var randPos = [];
 var H = 0.0;
 function random(min, max) {
   return Math.random() * (max - min) + min;
 }
-// const MIN = -50;
-// const MAX = 50;
-// const MIN_Z = -200;
-// const MAX_Z = -5;
-// const N = 500 //*2;
-// for(let ii = 0; ii < N; ii++) {
-//   let x = random(MIN, MAX);
-//   let y = random(MIN, MAX);
-//   let z = random(MIN_Z, MAX_Z);
-//
-//   randPos.push({x: x, y: y, z: z});
-// }
 
 var cols, rows;
 var scale = 50;
@@ -234,9 +222,6 @@ function drawScene(gl, objInfo, programInfo, deltaTime) {
     mat4.translate(modelMatrix, modelMatrix, [randPos[ii].x * 2, randPos[ii].z, randPos[ii].y * 2]);
     eyeY = randPos[ii].z =  noise.perlin3(randPos[ii].x * frequency, randPos[ii].y * frequency + moving, H);
     randPos[ii].z *=  amplitude;
-    // mat4.scale(modelMatrix, modelMatrix, [2,2,2]);
-    // mat4.rotate(modelMatrix, modelMatrix, rotate, [0.0, 1.0, 0.0]);
-    // mat4.rotate(modelMatrix, modelMatrix, randPos[ii].x, [1.0, 1.0, 0.0]);
 
     const normalMatrix = mat4.create();
     mat4.invert(normalMatrix, modelMatrix);
