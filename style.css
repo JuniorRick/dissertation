@@ -23,7 +23,7 @@
   font-size: 2em;
 }
 .subtitle {
-  font-size: 0.5em;
+  font-size: 0.4em;
   margin: 0;
 }
 .footer {
@@ -33,7 +33,10 @@
   font-size: 1.5em;
 }
 
-
+iframe, img {
+  width: 400px;
+  height: 300px;
+}
 #main-page {
   align-items: center;
   justify-content: center;
@@ -46,7 +49,10 @@
 #page-2 .content{
   font-size: 3.5em;
 }
-
+#page-5 .content{
+  font-size: 3.5em;
+  text-align: left;
+}
 section {
   margin: 0;
   padding: 0;

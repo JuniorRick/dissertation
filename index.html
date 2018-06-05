@@ -24,10 +24,10 @@
 
     <div id="main-page">
       <h1 class="title">Teza de master</h1>
-      <h2 class="content">
+      <div class="content">
         CERCETAREA METODELOR DE OPTIMIZARE A
         PROGRAMĂRII GRAFICE 3D ÎN WEBGL
-      </h2>
+      </div>
       <div class="footer">
         <div>Autor: Stinca Erast</div>
         <div>Conducator stiintific: Pereteatcu Sergiu,
@@ -91,58 +91,88 @@
 
     <div class="container" id="page-4">
       <h1 class="title">De ce WebGL?</h1>
-      <h2 class="content">
-        Pagina 4. CERCETAREA METODELOR DE OPTIMIZARE A
-        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
-      </h2>
+      <div class="content">
+        WebGL permite afisarea graficii 3D interactivă fără a utiliza
+        plug-in-uri. Funcționează cu orice platformă care acceptă OpenGL.
+      </div>
       <a href="#page-3"><div class="arrow arrow-left"></div></a>
       <a href="#page-5"><div class="arrow arrow-right"></div></a>
     </div>
+
     <div class="container" id="page-5">
-      <h2 class="content">
-        Pagina 5. CERCETAREA METODELOR DE OPTIMIZARE A
-        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
-      </h2>
+      <h1 class="title">
+        Avantajele WebGL asupra altor metode de prezentare a graficii:
+      </h1>
+      <div class="content">
+        - Datele elementului <code>&lt;video&gt;</code> ar trebui să fie video,
+        dar ar putea avea și audio sau imagini asociate cu acesta, dar nu poate
+        conține grafică interactivă spre deosebide de WebGL. <br><br>
+        - SVG nu poate produce efecte complexe de iluminare și de
+        material reflectorizant <br><br>
+        - Contextul WebGL este mult mai rapid decât contextul 2D deoarece WebGL permite utilizare accelerată GPU la
+        procesarea imaginilor<br><br>
+      </div>
       <a href="#page-4"><div class="arrow arrow-left"></div></a>
       <a href="#page-6"><div class="arrow arrow-right"></div></a>
     </div>
+
     <div class="container" id="page-6">
-      <h2 class="content">
-        Pagina 6. CERCETAREA METODELOR DE OPTIMIZARE A
-        PROGRAMĂRII GRAFICE 3D ÎN WEBGL
-      </h2>
+      <h1 class="title">Exemple WebGL</h1>
+      <div class="content">
+        <div class="grid-container grid-2">
+          <div class="grid-item">
+            <h5 class="subtitle"> biomuri generate pe bază de noise</h5>
+            <iframe src="https://demo.marpi.pl/biomes/"
+              frameborder="0"></iframe>
+          </div>
+          <div class="grid-item">
+            <h5 class="subtitle">Simulare Fluid</h5>
+            <iframe src="https://paveldogreat.github.io/WebGL-Fluid-Simulation/"
+              frameborder="0"></iframe>
+          </div>
+          <div class="grid-item">
+            <h5 class="subtitle">Structura chimică (Ampicilline)</h5>
+            <img src="images/ampicillin.png"></img>
+          </div>
+          <div class="grid-item">
+            <h5 class="subtitle">Fibrilația atrială</h5>
+            <img src="images/heart.png"></img>
+          </div>
+
+        </div>
+      </div>
       <a href="#page-5"><div class="arrow arrow-left"></div></a>
       <a href="#page-7"><div class="arrow arrow-right"></div></a>
     </div>
     <div class="container" id="page-7">
-      <h2 class="content">
+      <div class="content">
         Pagina 7. CERCETAREA METODELOR DE OPTIMIZARE A
         PROGRAMĂRII GRAFICE 3D ÎN WEBGL
-      </h2>
+      </div>
       <a href="#page-6"><div class="arrow arrow-left"></div></a>
       <a href="#page-8"><div class="arrow arrow-right"></div></a>
     </div>
     <div class="container" id="page-8">
-      <h2 class="content">
+      <div class="content">
         Pagina 8. CERCETAREA METODELOR DE OPTIMIZARE A
         PROGRAMĂRII GRAFICE 3D ÎN WEBGL
-      </h2>
+      </div>
       <a href="#page-7"><div class="arrow arrow-left"></div></a>
       <a href="#page-9"><div class="arrow arrow-right"></div></a>
     </div>
     <div class="container" id="page-9">
-      <h2 class="content">
+      <div class="content">
         Pagina 9. CERCETAREA METODELOR DE OPTIMIZARE A
         PROGRAMĂRII GRAFICE 3D ÎN WEBGL
-      </h2>
+      </div>
       <a href="#page-8"><div class="arrow arrow-left"></div></a>
       <a href="#page-10"><div class="arrow arrow-right"></div></a>
     </div>
     <div class="container" id="page-10">
-      <h2 class="content">
+      <div class="content">
         Pagina 10. CERCETAREA METODELOR DE OPTIMIZARE A
         PROGRAMĂRII GRAFICE 3D ÎN WEBGL
-      </h2>
+      </div>
       <a href="#page-9"><div class="arrow arrow-left"></div></a>
       <a href="#page-11"><div class="arrow arrow-right"></div></a>
     </div>
@@ -168,7 +198,13 @@
   context.fillRect(canvas.width / 2 - size , canvas.height / 2 - size,
   size * 2 , size * 2 );
 
-
+  window.onload = function() {
+    var url = window.location.href + '';
+    document.querySelector("#main-page").style.display = "none";
+    if(url.substr(-4) == 'html') {
+      document.querySelector("#main-page").style.display = "flex";
+    }
+  }
 </script>
 <script>
   var canvas = document.querySelector('#glCanvas');
