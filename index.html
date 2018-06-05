@@ -60,28 +60,28 @@
         <div class="grid-container grid-2">
             <div class="grid-item">
               <h5 class="subtitle">HTML5 video element</h5>
-              <video width="400" autoplay loop muted>
+              <video width="200" autoplay loop muted>
                 <source src="images/mov_bbb.mp4" type="video/mp4">
                 Your browser does not support HTML5 video.
               </video>
             </div>
             <div class="grid-item">
               <h5 class="subtitle">CanvasRenderingContext2D </h5>
-                <canvas id="myCanvas" width="300" height="200"></canvas>
+                <canvas id="myCanvas" width="200" height="150"></canvas>
             </div>
             <div class="grid-item">
             <h5 class="subtitle">SVG</h5>
-              <svg width="300" height="200">
-                <rect width="300" height="200"
+              <svg width="200" height="150">
+                <rect width="200" height="150"
                   style="fill:rgb(0,255,255);" />
-                <rect x="100" y="50" width="100" height="100"
+                <rect x="50" y="25" width="100" height="100"
                   style="fill:rgb(0,0,255);" />
                   Sorry, your browser does not support inline SVG.
               </svg>
             </div>
             <div class="grid-item">
               <h5 class="subtitle">WebGL</h5>
-              <canvas id="glCanvas" width="300" height="200"></canvas>
+              <canvas id="glCanvas" width="200" height="150"></canvas>
             </div>
         </div>
       </div>
@@ -120,16 +120,17 @@
       <h1 class="title">Exemple WebGL</h1>
       <div class="content">
         <div class="grid-container grid-2">
-          <!-- <div class="grid-item">
+          <div class="grid-item">
             <h5 class="subtitle"> biomuri generate pe bază de noise</h5>
-            <iframe src="https://demo.marpi.pl/biomes/"
-              frameborder="0"></iframe>
+            <a href="https://demo.marpi.pl/biomes/" target="_blank">
+              <img src="images/biomes.png" alt="">
+            </a>
           </div>
           <div class="grid-item">
             <h5 class="subtitle">Simulare Fluid</h5>
-            <iframe src="https://paveldogreat.github.io/WebGL-Fluid-Simulation/"
-              frameborder="0"></iframe>
-          </div> -->
+              <a href="https://paveldogreat.github.io/WebGL-Fluid-Simulation/"
+               target="_blank"><img src="images/fluid.png" alt=""></a>
+          </div>
           <div class="grid-item">
             <h5 class="subtitle">Structura chimică Ampicilline (screenshot) </h5>
             <img src="images/ampicillin.png"></img>
@@ -231,49 +232,17 @@
       <div class="content">
         <div class="grid-container grid-2">
           <div class="grid-item">
-            <div class="subtitle">Daca același vertex are culori diferite pentru triunghiuri
-              adiacente atunci nu are loc interpolarea
+            <div class="subtitle">Daca vârfurile unui triunghi au aceleași
+              culori atunci nu are loc interpolarea
             </div>
             <img src="images/noninterpolation.png" alt="">
-            <div class="code">
-              const vertices = [
-                -0.5, -0.5, 0.0, &nbsp;&nbsp;
-                -0.5, 0.5, 0.0,  &nbsp;&nbsp;
-                0.5, 0.5, 0.0,   &nbsp;&nbsp;
-                -0.5, -0.5, 0.0, &nbsp;&nbsp;
-                0.5, 0.5, 0.0,   &nbsp;&nbsp;
-                0.5, -0.5, 0.0,  &nbsp;&nbsp;
-              ];
-              const colors = [
-                1.0, 0.0, 0.0,   &nbsp;&nbsp;
-                1.0, 0.0, 0.0,  &nbsp;&nbsp;
-                1.0, 0.0, 0.0,   &nbsp;&nbsp;
-                0.0, 0.0, 1.0,   &nbsp;&nbsp;
-                0.0, 0.0, 1.0,   &nbsp;&nbsp;
-                0.0, 0.0, 1.0,   &nbsp;&nbsp;
-              ];
-            </div>
+
           </div>
           <div class="grid-item">
-            <div class="subtitle">Interpolarea are loc atunci când același vertex are
-              aceeași culoare pentru tringhiuri adiacente
+            <div class="subtitle">Interpolarea are loc atunci când un triunghi are
+              culori diferite ale vârfurilor
             </div>
             <img src="images/interpolation.png" alt="">
-            <code class="code">
-              const vertices = [
-                -0.5, -0.5, +0.0,&nbsp;&nbsp;-0.5, +0.5, +0.0,&nbsp;&nbsp;+0.5, +0.5, +0.0,
-                &nbsp;&nbsp;+0.5, -0.5, +0.0,
-              ];<br>
-              const colors&nbsp;&nbsp; = [
-                1.0, 0.0, 0.0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                0.0, 1.0, 0.0,&nbsp;&nbsp;&nbsp;&nbsp;
-                0.0, 0.0, 1.0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                1.0, 1.0, 0.0,
-              ];<br>
-              const indices = [
-                0, 1, 2,&nbsp;&nbsp;&nbsp;0, 2, 3,
-              ];
-            </code>
           </div>
         </div>
       </div>
@@ -285,7 +254,6 @@
       <h1 class="title">Contextul WebGL</h1>
       <div class="content">
         <img src="images/webgl_context.png" alt="">
-        <button id="contextBtn" class="btn">Imaginea randată</button>
         <!-- The Modal -->
         <div id="myModal" class="modal" id="webGlContext">
           <!-- Modal content -->
@@ -295,21 +263,69 @@
             <img src="images/context.png" alt="">
           </div>
         </div>
-      <div>
-
-      </div>
+        <div class="footer">
+          <button id="contextBtn" class="btn">Imaginea randată</button>
+        </div>
       </div>
       <a href="#page-13"><div class="arrow arrow-left"></div></a>
       <a href="#page-15"><div class="arrow arrow-right"></div></a>
     </div>
 
     <div class="container" id="page-15">
+      <h1 class="title">Vertex Shader & Fragment Shader</h1>
+      <div class="content">
+        <div class="subtitle">
+          Exemplu de declarare a shader-ilor
+        </div>
+        <img src="images/shaders.png" alt="">
+
+        <a href="#page-14"><div class="arrow arrow-left"></div></a>
+        <a href="#page-16"><div class="arrow arrow-right"></div></a>
+      </div>
+    </div>
+
+    <div class="container" id="page-16">
+      <h1 class="title">Shader program</h1>
+      <div class="content">
+        <div class="subtitle">Compilarea shaderilor si crearea programului
+        de shader:</div>
+        <img src="images/program.png" alt="">
+      </div>
+      <a href="#page-15"><div class="arrow arrow-left"></div></a>
+      <a href="#page-17"><div class="arrow arrow-right"></div></a>
+    </div>
+
+    <div class="container" id="page-17">
+      <h1 class="title">Textura</h1>
+      <div class="content">
+        <div class="subtitle"></div>
+        <img src="images/texture.png" alt="">
+      </div>
+      <a href="#page-16"><div class="arrow arrow-left"></div></a>
+      <a href="#page-18"><div class="arrow arrow-right"></div></a>
+    </div>
+
+    <div class="container" id="page-18">
+      <h1 class="title">Iluminarea</h1>
+      <div class="content">
+
+        WebGL nu știe nimic despre iluminare. Datele
+        despre fiecare vertex se stochează în variabile JavaScript de tip array.
+        Acesta oferă, de asemenea, funcțiile pentru a face calculele necesare
+        pentru a afla - în funcție de modelul de iluminare,
+        care ar trebui să fie culoarea unui anumit pixel.
+      </div>
+      <a href="#page-17"><div class="arrow arrow-left"></div></a>
+      <a href="#page-19"><div class="arrow arrow-right"></div></a>
+    </div>
+
+    <div class="container" id="page-19">
       <h1 class="title">Cub 3D</h1>
       <div class="content">
         <div>
           Tastați butonul de mai jos pentru randarea cuburilor 3D
         </div>
-        <button class="btn" id="cubeBtn">Vizualizare cub</button>
+        <button class="btn" id="cubeBtn">Vizualizare cuburi</button>
         <!-- The Modal -->
         <div class="modal" id="cubeModal">
           <!-- Modal content -->
@@ -322,29 +338,169 @@
           </div>
         </div>
       </div>
-      <a href="#page-14"><div class="arrow arrow-left"></div></a>
-      <a href="#page-16"><div class="arrow arrow-right"></div></a>
+      <a href="#page-18"><div class="arrow arrow-left"></div></a>
+      <a href="#page-20"><div class="arrow arrow-right"></div></a>
     </div>
-    <div class="container" id="page-16">
-      <h1 class="title"></h1>
+
+    <div class="container" id="page-20">
+      <h1 class="title">Randarea obiectelor</h1>
       <div class="content">
-      <div>
+        <ul>
+          <li>Generarea a N poziții aleatorii</li>
+          <li>Crearea și inițializarea bufferilor</li>
+          <li>Ciclu
+            <ul>
+              <li>N iterații
+                <ul>
+                  <li>setarea bufferilor</li>
+                  <li>setarea attributelor</li>
+                  <li>setarea uniformelor</li>
+                  <li>desenare elemente</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="footer">
+        <a href="13 (100 objects)/index.html" target="_blank">Randare pagina noua</a>
+      </div>
+      <a href="#page-19"><div class="arrow arrow-left"></div></a>
+      <a href="#page-21"><div class="arrow arrow-right"></div></a>
+    </div>
+
+    <div class="container" id="page-21">
+      <h1 class="title">Optimizarea de randare a obiectelor</h1>
+      <div class="content">
+        <ul>
+          <li>Generarea a N poziții aleatorii</li>
+          <li>Crearea și inițializarea bufferilor</li>
+          <li>setarea bufferilor</li>
+          <li>setarea attributelor</li>
+          <li>setarea uniformelor distribuite</li>
+          <li>Ciclu
+            <ul>
+              <li>N iterații
+                <ul>
+                  <li>setarea uniformelor unice</li>
+                  <li>desenare elemente</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="footer">
+        <a href="14 (optimize 1000)/index.html" target="_blank">Randare pagina noua</a>
+      </div>
+      <a href="#page-20"><div class="arrow arrow-left"></div></a>
+      <a href="#page-22"><div class="arrow arrow-right"></div></a>
+    </div>
+
+    <div class="container" id="page-22">
+      <h1 class="title">Randare obiecte diferite</h1>
+      <div class="content">
+        <ul>
+          <li>Generarea a N poziții aleatorii</li>
+          <li>Ciclu
+            <ul>
+              <li>N iterații
+                <ul>
+                  <li>Crearea și inițializarea buffer obiect 1</li>
+                  <li>setarea bufferilor</li>
+                  <li>setarea attributelor</li>
+                  <li>setarea uniformelor</li>
+                  <li>desenare elemente</li>
+                  <br>
+                  <li>Crearea și inițializarea buffer obiect 2</li>
+                  <li>setarea bufferilor</li>
+                  <li>setarea attributelor</li>
+                  <li>setarea uniformelor</li>
+                  <li>desenare elemente</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="footer">
+        <a href="15.0/index.html" target="_blank">Randare obiecte diferite</a>
+      </div>
+      <a href="#page-21"><div class="arrow arrow-left"></div></a>
+      <a href="#page-23"><div class="arrow arrow-right"></div></a>
+    </div>
+
+    <div class="container" id="page-23">
+      <h1 class="title">Optimizare randare obiecte diferite</h1>
+      <div class="content">
+        <ul>
+          <li>Generarea a N poziții aleatorii</li>
+          <li>setarea uniformelor distribuite</li>
+          <li>Ciclu
+            <ul>
+              <li>N iterații
+                <ul>
+                  <li>Crearea și inițializarea buffer obiect 1</li>
+                  <li>setarea bufferilor</li>
+                  <li>setarea attributelor</li>
+                  <li>setarea uniformelor unice</li>
+                  <li>desenare elemente</li>
+                </ul>
+              </li>
+              <li>N iterații
+                <ul>
+                  <li>Crearea și inițializarea buffer obiect 2</li>
+                  <li>setarea bufferilor</li>
+                  <li>setarea attributelor</li>
+                  <li>setarea uniformelor unice</li>
+                  <li>desenare elemente</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="footer">
+        <a href="15.1/index.html" target="_blank">Randare obiecte diferite</a>
+      </div>
+      <a href="#page-22"><div class="arrow arrow-left"></div></a>
+      <a href="#page-24"><div class="arrow arrow-right"></div></a>
+    </div>
+
+    <div class="container" id="page-24">
+      <h1 class="title">Perlin noise</h1>
+      <div class="content">
 
       </div>
+      <div class="footer">
+        <a href="16 perlin/index.html" target="_blank">Link</a>
       </div>
-      <a href="#page-15"><div class="arrow arrow-left"></div></a>
-      <a href="#page-17"><div class="arrow arrow-right"></div></a>
+      <a href="#page-23"><div class="arrow arrow-left"></div></a>
+      <a href="#page-25"><div class="arrow arrow-right"></div></a>
     </div>
-    <div class="container" id="page-17">
-      <h1 class="title"></h1>
+    <div class="container" id="page-25">
+      <h1 class="title">Generare teren infinit</h1>
       <div class="content">
-      <div>
 
       </div>
+      <div class="footer">
+        <a href="16 perlin/index.html" target="_blank">Link</a>
       </div>
-      <a href="#page-16"><div class="arrow arrow-left"></div></a>
-      <a href="#page-18"><div class="arrow arrow-right"></div></a>
+      <a href="#page-24"><div class="arrow arrow-left"></div></a>
+      <a href="#page-26"><div class="arrow arrow-right"></div></a>
     </div>
+    <div class="container" id="page-26">
+      <h1 class="title"></h1>
+      <div class="content">
+        Vă mulțumesc pentru atenție
+      </div>
+      <div class="footer">
+        <a href="16 perlin/index.html" target="_blank">Link</a>
+      </div>
+      <a href="#page-25"><div class="arrow arrow-left"></div></a>
+      <!-- <a href="#page-27"><div class="arrow arrow-right"></div></a> -->
+    </div>
+
   </section>
 
 <script>
@@ -406,10 +562,10 @@
   const positionBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
   const vertices = [
-    -0.3, -0.4, 0.0, //vertex 1
-    -0.3, 0.4, 0.0,  //vertex 2
-    0.3, 0.4, 0.0,   //vertex 3
-    0.3, -0.4, 0.0,  //vertex 4
+    -0.5, -0.5, 0.0, //vertex 1
+    -0.5, 0.5, 0.0,  //vertex 2
+    0.5, 0.5, 0.0,   //vertex 3
+    0.5, -0.5, 0.0,  //vertex 4
   ];
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 

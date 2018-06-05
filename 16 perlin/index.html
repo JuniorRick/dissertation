@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <canvas id="glCanvas" width="800" height="600"></canvas>
+    <canvas id="perlinCanvas" width="800" height="600"></canvas>
 
     <script src="../utils/webgl-utils.js" charset="utf-8"></script>
     <script src="../utils/glMatrix.js" charset="utf-8"></script>
@@ -61,7 +61,7 @@
           }
         `;
 
-        var canvas = document.querySelector('#glCanvas');
+        var canvas = document.querySelector('#perlinCanvas');
         var gl = canvas.getContext('webgl');
 
         canvas.width = window.innerWidth;
@@ -151,7 +151,7 @@
 
           gl.clear(gl.COLOR_BUFFER_BIT |  gl.DEPTH_BUFFER_BIT);
 
-          gl.drawArrays(gl.POINTS, 0, count);
+          gl.drawArrays(gl.TRIANGLES, 0, count);
           requestAnimationFrame(render);
         }
         requestAnimationFrame(render);
@@ -162,22 +162,23 @@
         var terrainVertices = [[]];
         var fn = 'simplex';
         var scale = 10;
-        var cWidth = canvas.width / scale;
-        var cHeight = canvas.height / scale;
+        var cWidth = Math.floor(canvas.width / scale);
+        var cHeight = Math.floor(canvas.height / scale);
         var max = -Infinity, min = Infinity;
         // var noisefn = fn === 'simplex' ? noise.simplex3 : noise.perlin3;
         var noisefn = noise.perlin3;
-        for (var x = 0; x < cWidth; x++) {
-         for (var y = 0; y < cHeight; y++) {
-           var value = noisefn(x / 50, y / 50, height);
+        for (var y = 0; y < cHeight; y++) {
+          for (var x = 0; x < cWidth; x++) {
+           var value = noisefn(x / 20, y / 20, height);
            if (max < value) max = value;
            if (min > value) min = value;
            // value = (1 + value) * 1.1 * 128;
+
            terrainVertices[i++] = [
              x * scale, y * scale, value * 50,
              value * r,
-             value * 0,
-             value * 0,
+             value * g,
+             value * b,
            ];
          }
         }
@@ -193,6 +194,7 @@
             vertices.push(terrainVertices[y * cWidth + x][3]);
             vertices.push(terrainVertices[y * cWidth + x][4]);
             vertices.push(terrainVertices[y * cWidth + x][5]);
+
 
             vertices.push(terrainVertices[(y + 1) * cWidth + x][0]);
             vertices.push(terrainVertices[(y + 1) * cWidth + x][1]);

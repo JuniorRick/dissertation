@@ -23,6 +23,7 @@
   font-size: 2em;
 }
 .subtitle {
+  padding: 10px;
   font-size: 0.3em;
   margin: 0;
 }
@@ -34,8 +35,8 @@
 }
 
 iframe, img {
-  width: 400px;
-  height: 300px;
+  width: 30vw;
+  height: 30vh;
 }
 #main-page {
   align-items: center;
@@ -50,7 +51,7 @@ iframe, img {
   font-size: 3.5em;
 }
 #page-5 .content{
-  font-size: 3.5em;
+  font-size: 2.5em;
   text-align: left;
 }
 #page-7 .content, #page-11 .content {
@@ -64,17 +65,26 @@ iframe, img {
   width: 40vw;
   height: auto;
 }
-#page-8 .content, #page-9 .content{
+#page-8 .content,
+#page-9 .content,
+#page-18 .content,
+#page-20 .content,
+#page-21 .content {
   font-size: 3em;
   margin: 2vw;
 }
+#page-20 .content,
+#page-21 .content {
+  text-align: left;
+}
+
 #page-10 .content {
   font-size: 4em;
 }
 
 #page-12 .content{
   text-align: left;
-  font-size: 3.5em;
+  font-size: 2.5em;
   margin: 50px;
 }
 #page-12 ul {
@@ -93,9 +103,17 @@ iframe, img {
   width: auto;
   height: auto;
 }
-#page-15 canvas {
-  width: 400px;
-  height: 200px;
+#page-15 img,
+#page-16 img,
+#page-17 img {
+  width: 50vw;
+  height: auto;
+}
+
+#page-22 .content,
+#page-23 .content {
+  font-size: 2em;
+  text-align: left;
 }
 
 section {
@@ -130,7 +148,7 @@ section {
     border: 1px solid black;
     margin: 3px;
     padding: 10px;
-    min-width: 40vw;
+    min-width: 30vw;
 }
 .arrow {
   position: absolute;
