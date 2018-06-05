@@ -22,6 +22,17 @@
   color: rgb(120, 120, 210);
   font-size: 2em;
 }
+.subtitle {
+  font-size: 0.5em;
+  margin: 0;
+}
+.footer {
+  position: absolute;
+  right: 50px;
+  bottom: 20px;
+  font-size: 1.5em;
+}
+
 
 #main-page {
   align-items: center;
@@ -29,6 +40,11 @@
   height: 100vh;
   display: flex;
   background: #fff;
+  /* position: absolute; */
+}
+
+#page-2 .content{
+  font-size: 3.5em;
 }
 
 section {
@@ -56,6 +72,7 @@ section {
 .grid-item {
     border: 1px solid black;
     margin: 3px;
+    padding: 10px;
     min-width: 40vw;
 }
 .arrow {
