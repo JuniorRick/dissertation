@@ -120,7 +120,7 @@
       <h1 class="title">Exemple WebGL</h1>
       <div class="content">
         <div class="grid-container grid-2">
-          <div class="grid-item">
+          <!-- <div class="grid-item">
             <h5 class="subtitle"> biomuri generate pe bază de noise</h5>
             <iframe src="https://demo.marpi.pl/biomes/"
               frameborder="0"></iframe>
@@ -129,7 +129,7 @@
             <h5 class="subtitle">Simulare Fluid</h5>
             <iframe src="https://paveldogreat.github.io/WebGL-Fluid-Simulation/"
               frameborder="0"></iframe>
-          </div>
+          </div> -->
           <div class="grid-item">
             <h5 class="subtitle">Structura chimică Ampicilline (screenshot) </h5>
             <img src="images/ampicillin.png"></img>
@@ -187,12 +187,163 @@
     <div class="container" id="page-10">
       <h1 class="title">Rasterizare</h1>
       <div class="content">
-      <div>Procesul de transformare a figurilor geometrice definite într-un format vectorial
+      <div>
+        Procesul de transformare a figurilor geometrice definite într-un format vectorial
         în fragmente (pixeli sau puncte) pentru a fi afișate pe un ecran video
-        se numeste rasterizare.</div>
+        se numeste rasterizare.
+      </div>
       </div>
       <a href="#page-9"><div class="arrow arrow-left"></div></a>
       <a href="#page-11"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-11">
+      <h1 class="title">Fragment</h1>
+      <div class="content">
+        <img src="images/fragment.png" alt="">
+        <div>
+          Un pixel generat de procesul de rasterizare care are culoare,
+          adâncime, valoare, coordonate de textură și multe altele se
+          numeste fragment.
+         </div>
+      </div>
+      <a href="#page-10"><div class="arrow arrow-left"></div></a>
+      <a href="#page-12"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-12">
+      <h1 class="title">Shaders</h1>
+      <div class="content">
+        <div>
+          Un shader este un mic program cu sintaxa asemănătoare limbajului C
+          și rulează pe GPU. Un shader program este compus din vertex
+          shader și fragment shader: <br>
+          <ul>
+            <li>Vertex shader este executat pentru fiecare vârf</li>
+            <li>Fragment shader este executat pentru fiecare fragment,
+              valorile culorilor fiind interpolate între ele.</li>
+          </ul>
+        </div>
+      </div>
+      <a href="#page-11"><div class="arrow arrow-left"></div></a>
+      <a href="#page-13"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-13">
+      <h1 class="title">Interpolarea culorilor</h1>
+      <div class="content">
+        <div class="grid-container grid-2">
+          <div class="grid-item">
+            <div class="subtitle">Daca același vertex are culori diferite pentru triunghiuri
+              adiacente atunci nu are loc interpolarea
+            </div>
+            <img src="images/noninterpolation.png" alt="">
+            <div class="code">
+              const vertices = [
+                -0.5, -0.5, 0.0, &nbsp;&nbsp;
+                -0.5, 0.5, 0.0,  &nbsp;&nbsp;
+                0.5, 0.5, 0.0,   &nbsp;&nbsp;
+                -0.5, -0.5, 0.0, &nbsp;&nbsp;
+                0.5, 0.5, 0.0,   &nbsp;&nbsp;
+                0.5, -0.5, 0.0,  &nbsp;&nbsp;
+              ];
+              const colors = [
+                1.0, 0.0, 0.0,   &nbsp;&nbsp;
+                1.0, 0.0, 0.0,  &nbsp;&nbsp;
+                1.0, 0.0, 0.0,   &nbsp;&nbsp;
+                0.0, 0.0, 1.0,   &nbsp;&nbsp;
+                0.0, 0.0, 1.0,   &nbsp;&nbsp;
+                0.0, 0.0, 1.0,   &nbsp;&nbsp;
+              ];
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="subtitle">Interpolarea are loc atunci când același vertex are
+              aceeași culoare pentru tringhiuri adiacente
+            </div>
+            <img src="images/interpolation.png" alt="">
+            <code class="code">
+              const vertices = [
+                -0.5, -0.5, +0.0,&nbsp;&nbsp;-0.5, +0.5, +0.0,&nbsp;&nbsp;+0.5, +0.5, +0.0,
+                &nbsp;&nbsp;+0.5, -0.5, +0.0,
+              ];<br>
+              const colors&nbsp;&nbsp; = [
+                1.0, 0.0, 0.0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                0.0, 1.0, 0.0,&nbsp;&nbsp;&nbsp;&nbsp;
+                0.0, 0.0, 1.0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                1.0, 1.0, 0.0,
+              ];<br>
+              const indices = [
+                0, 1, 2,&nbsp;&nbsp;&nbsp;0, 2, 3,
+              ];
+            </code>
+          </div>
+        </div>
+      </div>
+      <a href="#page-12"><div class="arrow arrow-left"></div></a>
+      <a href="#page-14"><div class="arrow arrow-right"></div></a>
+    </div>
+
+    <div class="container" id="page-14">
+      <h1 class="title">Contextul WebGL</h1>
+      <div class="content">
+        <img src="images/webgl_context.png" alt="">
+        <button id="contextBtn" class="btn">Imaginea randată</button>
+        <!-- The Modal -->
+        <div id="myModal" class="modal" id="webGlContext">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <p>Contextul webGL</p>
+            <span class="close">&times;</span>
+            <img src="images/context.png" alt="">
+          </div>
+        </div>
+      <div>
+
+      </div>
+      </div>
+      <a href="#page-13"><div class="arrow arrow-left"></div></a>
+      <a href="#page-15"><div class="arrow arrow-right"></div></a>
+    </div>
+
+    <div class="container" id="page-15">
+      <h1 class="title">Cub 3D</h1>
+      <div class="content">
+        <div>
+          Tastați butonul de mai jos pentru randarea cuburilor 3D
+        </div>
+        <button class="btn" id="cubeBtn">Vizualizare cub</button>
+        <!-- The Modal -->
+        <div class="modal" id="cubeModal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <p>Cub 3D</p>
+            <span class="close">&times;</span>
+            <canvas id="cube"></canvas>
+            <canvas id="cubeTexture"></canvas>
+            <canvas id="cubeLighting"></canvas>
+          </div>
+        </div>
+      </div>
+      <a href="#page-14"><div class="arrow arrow-left"></div></a>
+      <a href="#page-16"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-16">
+      <h1 class="title"></h1>
+      <div class="content">
+      <div>
+
+      </div>
+      </div>
+      <a href="#page-15"><div class="arrow arrow-left"></div></a>
+      <a href="#page-17"><div class="arrow arrow-right"></div></a>
+    </div>
+    <div class="container" id="page-17">
+      <h1 class="title"></h1>
+      <div class="content">
+      <div>
+
+      </div>
+      </div>
+      <a href="#page-16"><div class="arrow arrow-left"></div></a>
+      <a href="#page-18"><div class="arrow arrow-right"></div></a>
     </div>
   </section>
 
@@ -280,6 +431,52 @@
   gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
 
 </script>
+<script>
+  // Get the modal
+  var modal = document.getElementById('myModal');
+  var btn = document.getElementById("contextBtn");
+  var span = document.getElementsByClassName("close")[0];
+  var span1 = document.getElementsByClassName("close")[1];
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function() {
+      modal.style.display = "block";
+  }
+  var cubeIsRendering = false;
+  document.querySelector('#cubeBtn').onclick = function() {
+    if(cubeIsRendering == false){
+      drawCube();
+      drawCubeTexture();
+      drawCubeLighting();
+      cubeIsRendering = true;
+  }
+    document.querySelector('#cubeModal').style.display = "block";
+  }
+  // When the user clicks on <span> (x), close the modal
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  span1.onclick = function() {
+   document.querySelector('#cubeModal').style.display = "none";
+  }
+
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+
+
+</script>
+<script src="utils/glMatrix.js" charset="utf-8"></script>
+<script src="utils/webgl-utils.js" charset="utf-8"></script>
+<script src="utils/primitives.js" charset="utf-8"></script>
+<script src="08 3dCube\cube.js" charset="utf-8"></script>
+<script src="09 3dCube (texture)\cubeTexture.js" charset="utf-8"></script>
+<script src="10 3dCube (lighting)\cubeLighting.js" charset="utf-8"></script>
 </body>
 
 </html>
